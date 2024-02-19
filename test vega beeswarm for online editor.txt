@@ -36,7 +36,7 @@
       "name": "color",
       "type": "ordinal",
       "domain": {"data": "dataset", "field": "color"},
-      "range": ["grey","red","blue","yellow"]
+      "range": ["grey","red","blue","grey"]
     }
   ],
   "axes": [
@@ -64,7 +64,7 @@
           "strokeWidth": {"minmax_value": 0.05},
           "zindex": {"minmax_value": 1},
           "size": {"value": 10},
-          "tooltip": {"signa": "{'County': datum['county_state'], 'value': datum['value']}"}
+          "tooltip": {"signal": "{'County': datum['county_state'], 'value': datum['value']}"}
         }
       },
       "transform": [
