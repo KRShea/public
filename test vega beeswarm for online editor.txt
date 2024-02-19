@@ -63,7 +63,7 @@
           "stroke": {"minmax_value": "black"},
           "strokeWidth": {"minmax_value": 0.05},
           "zindex": {"minmax_value": 1},
-          "size": {"value": 10},
+          "size": {"value": 5},
           "tooltip": {"signal": "{'County': datum['county_state'], 'value': datum['value']}"}
         }
       },
@@ -74,7 +74,7 @@
           "static": true,
           "alpha": 0.2,
           "forces": [
-            {"force": "collide", "iterations": 4, "strength": 0.5, "radius": 2},
+            {"force": "collide", "iterations": 4, "strength": 0.5, "radius": 1},
             {"force": "x", "x": "x", "strength": 1},
             {"force": "y", "y": "y", "strength": 8}
           ]
