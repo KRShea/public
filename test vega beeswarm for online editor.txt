@@ -1,0 +1,85 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+   "data": [
+    {
+      "name": "dataset",
+      "url": "https://raw.githubusercontent.com/KRShea/public/main/county_demographic_data_test.json",
+      "format": {"type": "json", "property": "nodes"}
+    }
+  ],
+
+  "width": 800,
+  "height": 300,
+  "padding": {
+    "left": 20,
+    "right": 5,
+    "top": 10,
+    "bottom": 10
+  },
+  "autosize": "pad",
+  "scales": [
+    {
+      "name": "yscale",
+      "type": "linear",
+      "domain": {"data": "dataset", "field": "minmax_value"},
+      "range": "height",
+      "zero": true
+    },
+    {
+      "name": "xscale",
+      "type": "band",
+      "range": "width",
+      "round": true,
+      "domain": {"data": "dataset", "field": "variable"}
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "dataset", "field": "color"},
+      "range": ["grey","red","blue","yellow"]
+    }
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "xscale",
+      "labelPadding": 20
+    },
+    {
+      "orient": "left",
+      "scale": "yscale"
+    }
+  ],
+  "marks": [
+    {
+      "name": "nodes",
+      "type": "symbol",
+      "from": {"data": "dataset"},
+      "encode": {
+        "enter": {"fill": {"scale": "color", "field": "color"}},
+        "update": {
+          "x": {"scale": "xscale", "field": "variable", "band": 0.5},
+          "y": {"scale": "yscale", "field": "minmax_value"},
+          "stroke": {"minmax_value": "black"},
+          "strokeWidth": {"minmax_value": 0.05},
+          "zindex": {"minmax_value": 1},
+          "size": {"value": 10},
+          "tooltip": {"signa": "{'County': datum['county_state'], 'value': datum['value']}"}
+        }
+      },
+      "transform": [
+        {
+          "type": "force",
+          "restart": true,
+          "static": true,
+          "alpha": 0.2,
+          "forces": [
+            {"force": "collide", "iterations": 4, "strength": 0.5, "radius": 2},
+            {"force": "x", "x": "x", "strength": 1},
+            {"force": "y", "y": "y", "strength": 8}
+          ]
+        }
+      ]
+    }
+  ]
+}
